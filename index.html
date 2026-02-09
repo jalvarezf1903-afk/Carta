@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para el amor de mi vida</title>
-<link rel="icon" type="foto.jpeg" href="favicon.jpeg">
+<link rel="icon" type="image/jpeg" href="foto.jpeg">
 
 <style>
 *{
@@ -17,19 +17,18 @@
 body{
     min-height:100vh;
     background:url("foto.jpeg") no-repeat center center/cover;
-    background-attachment: fixed;
 }
 
-/* Overlay oscuro */
+/* Overlay */
 .overlay{
     background:rgba(0,0,0,0.65);
-    width:100%;
     min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
     padding:40px 0;
 }
+
 /* SOBRE */
 .envelope{
     width:300px;
@@ -38,7 +37,7 @@ body{
     position:relative;
     cursor:pointer;
     border-radius:10px;
-    display:flex;
+    display:none;
     justify-content:center;
     align-items:center;
     color:white;
@@ -49,13 +48,10 @@ body{
 .envelope::before{
     content:"";
     position:absolute;
-    top:0;
-    left:0;
     width:100%;
     height:100%;
     background:#ff1e4d;
     clip-path:polygon(0 0, 50% 50%, 100% 0);
-    transition:1s;
 }
 
 .open{
@@ -103,19 +99,7 @@ button:hover{
     transform:scale(1.1);
 }
 
-/* Juego */
-#game{
-    margin-top:20px;
-    display:none;
-}
-
-.heartGame{
-    font-size:30px;
-    position:absolute;
-    cursor:pointer;
-}
-
-/* Video */
+/* VIDEO */
 .video-container{
     margin-top:20px;
     display:none;
@@ -126,7 +110,13 @@ video{
     border-radius:15px;
 }
 
-/* Animaciones */
+/* Juego corazones */
+.heartGame{
+    font-size:35px;
+    position:absolute;
+    cursor:pointer;
+}
+
 @keyframes fadeIn{
     from{opacity:0; transform:scale(0.9);}
     to{opacity:1; transform:scale(1);}
@@ -135,51 +125,85 @@ video{
 </head>
 
 <body>
-        <div id="game">
-            <p style="opacity:1;">Atrapa el corazón</p>
-        </div>
+
 <audio id="musica" src="novatos (Visualizer).mp3" loop></audio>
 
 <div class="overlay">
 
     <!-- SOBRE -->
     <div class="envelope" id="envelope" onclick="abrirCarta()">
-        Ábreme
+        Ábreme 💌
     </div>
 
     <!-- CARTA -->
     <div class="card" id="card">
         <h1>Para el amor de mi vida</h1>
 
-        <p id="t1">Mi corazón, gracias por ser la niña mas increíblemente hermosa y especial que hay en mi vida, no sé que sería de mi sin ti, te amo con cada átomo de mi ser mi niña, lo que mas quisiera es estar contigo siempre mi amor, lamento no poder estar a tu lado ahora mi niña, pronto espero poder abrazarte y sentir tus brazos envolviendome mi amor, tu eres mi mayor motivación para continuar luchando y para poder darte todo mi amor, sé que nunca me lo has pedido, pero es algo que en realidad quiero contigo, hacerte feliz siempre será mi propósito mi amor, aunque no siempre lo he hecho y sé que tengo muchos errores, espero que nuestro amor tan puro, siempre sea más mi amor y que nuestro amor podrá con todas las dificultades que vengan, como ya ha podido con todo lo pasado.</p>
-        <p id="t2">Mi amor, te agraezco enormemente por siempre tratar de entenderme y por siempre tratar de estar para mí, gracias por siempre decirme que me amas y por tenerme paciencia, gracias por esperarme y por no negarte a tenerme lejos, me has ayudado mucho a no sentirme tan sólo acá mi amor y siempre te lo agradeceré, pronto espero volver a estar a tu lado y abrazarte por horas y horas mi amor, tú eres el amor de mi vida mi niña.</p>
-   
-        <button onclick="revelar()">Seguir</button>
+        <p id="t1">
+        Mi corazón, gracias por ser la niña mas increíblemente hermosa y especial que hay en mi vida, no sé que sería de mi sin ti, te amo con cada átomo de mi ser mi niña, lo que mas quisiera es estar contigo siempre mi amor, lamento no poder estar a tu lado ahora mi niña, pronto espero poder abrazarte y sentir tus brazos envolviendome mi amor, tu eres mi mayor motivación para continuar luchando y para poder darte todo mi amor, sé que nunca me lo has pedido, pero es algo que en realidad quiero contigo, hacerte feliz siempre será mi propósito mi amor, aunque no siempre lo he hecho y sé que tengo muchos errores, espero que nuestro amor tan puro, siempre sea más mi amor y que nuestro amor podrá con todas las dificultades que vengan, como ya ha podido con todo lo pasado.
+        </p>
+
+        <p id="t2">
+        Mi amor, te agraezco enormemente por siempre tratar de entenderme y por siempre tratar de estar para mí, gracias por siempre decirme que me amas y por tenerme paciencia, gracias por esperarme y por no negarte a tenerme lejos, me has ayudado mucho a no sentirme tan sólo acá mi amor y siempre te lo agradeceré, pronto espero volver a estar a tu lado y abrazarte por horas y horas mi amor, tú eres el amor de mi vida mi niña.
+        </p>
+
+        <button onclick="revelar()">Seguir 💖</button>
+
         <div class="video-container" id="videoBox">
-            <p style="opacity:1;">Esto es para ti...</p>
+            <p style="opacity:1;">Por nuestro gran amor mi niña</p>
             <video controls>
                 <source src="video.mp4" type="video/mp4">
             </video>
         </div>
     </div>
+
 </div>
 
 <script>
-let paso = 0;
 let corazonesAtrapados = 0;
+let paso = 0;
 
+/* INICIA EL JUEGO AUTOMÁTICAMENTE */
+window.onload = function(){
+    crearCorazon();
+};
+
+function crearCorazon(){
+    const heart = document.createElement("div");
+    heart.classList.add("heartGame");
+    heart.innerHTML = "❤️";
+    heart.style.top = Math.random()*80+"vh";
+    heart.style.left = Math.random()*80+"vw";
+
+    heart.onclick = function(){
+        corazonesAtrapados++;
+        heart.remove();
+
+        if(corazonesAtrapados >= 3){
+            document.getElementById("envelope").style.display = "flex";
+        } else {
+            crearCorazon();
+        }
+    }
+
+    document.body.appendChild(heart);
+}
+
+/* ABRIR SOBRE */
 function abrirCarta(){
     const audio = document.getElementById("musica");
-    audio.volume = 0.3; 
+    audio.volume = 0.3;
     audio.play();
+
     document.getElementById("envelope").classList.add("open");
+
     setTimeout(()=>{
         document.getElementById("envelope").style.display="none";
         document.getElementById("card").style.display="block";
-        document.getElementById("musica").play();
     },800);
 }
 
+/* REVELAR CARTA */
 function revelar(){
     paso++;
 
@@ -190,36 +214,8 @@ function revelar(){
         document.getElementById("t2").style.opacity=1;
     }
     else if(paso===3){
-        document.getElementById("t3").style.opacity=1;
+        document.getElementById("videoBox").style.display="block";
     }
-    else if(paso===4){
-        iniciarJuego();
-    }
-}
-
-function iniciarJuego(){
-    document.getElementById("game").style.display="block";
-    crearCorazon();
-}
-
-function crearCorazon(){
-    const heart=document.createElement("div");
-    heart.classList.add("heartGame");
-    heart.innerHTML="❤️";
-    heart.style.top=Math.random()*80+"vh";
-    heart.style.left=Math.random()*80+"vw";
-
-    heart.onclick=function(){
-        corazonesAtrapados++;
-        heart.remove();
-        if(corazonesAtrapados>=3){
-            document.getElementById("videoBox").style.display="block";
-        }else{
-            crearCorazon();
-        }
-    }
-
-    document.body.appendChild(heart);
 }
 </script>
 
