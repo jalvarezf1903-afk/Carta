@@ -15,24 +15,21 @@
 }
 
 body{
-    height:100vh;
+    min-height:100vh;
     background:url("foto.jpeg") no-repeat center center/cover;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
+    background-attachment: fixed;
 }
 
 /* Overlay oscuro */
 .overlay{
     background:rgba(0,0,0,0.65);
     width:100%;
-    height:100%;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
+    padding:40px 0;
 }
-
 /* SOBRE */
 .envelope{
     width:300px;
@@ -138,7 +135,9 @@ video{
 </head>
 
 <body>
-
+        <div id="game">
+            <p style="opacity:1;">Atrapa el corazón</p>
+        </div>
 <audio id="musica" src="novatos (Visualizer).mp3" loop></audio>
 
 <div class="overlay">
@@ -156,11 +155,6 @@ video{
         <p id="t2">Mi amor, te agraezco enormemente por siempre tratar de entenderme y por siempre tratar de estar para mí, gracias por siempre decirme que me amas y por tenerme paciencia, gracias por esperarme y por no negarte a tenerme lejos, me has ayudado mucho a no sentirme tan sólo acá mi amor y siempre te lo agradeceré, pronto espero volver a estar a tu lado y abrazarte por horas y horas mi amor, tú eres el amor de mi vida mi niña.</p>
    
         <button onclick="revelar()">Seguir</button>
-
-        <div id="game">
-            <p style="opacity:1;">Atrapa el corazón</p>
-        </div>
-
         <div class="video-container" id="videoBox">
             <p style="opacity:1;">Esto es para ti...</p>
             <video controls>
