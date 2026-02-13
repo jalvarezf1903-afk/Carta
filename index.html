@@ -43,6 +43,8 @@ body{
     color:white;
     font-weight:bold;
     transition:1s;
+    animation: glow 1.5s infinite alternate;
+
 }
 
 .envelope::before{
@@ -103,6 +105,15 @@ button:hover{
 .video-container{
     margin-top:20px;
     display:none;
+    background:white;
+    width:90%;
+    max-width:600px;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,0.4);
+    display:none;
+    animation:fadeIn 1.5s ease;
 }
 
 video{
@@ -116,11 +127,30 @@ video{
     position:absolute;
     cursor:pointer;
 }
+.explosion{
+    position:absolute;
+    font-size:25px;
+    animation:explode 0.8s forwards;
+}
+#instrucciones{
+    animation: fadeIn 1.5s ease;
+}
+
+
+@keyframes explode{
+    0%{transform:scale(1); opacity:1;}
+    100%{transform:scale(3); opacity:0;}
+}
 
 @keyframes fadeIn{
     from{opacity:0; transform:scale(0.9);}
     to{opacity:1; transform:scale(1);}
 }
+@keyframes glow{
+    from{box-shadow:0 0 10px #ff4d6d;}
+    to{box-shadow:0 0 30px #ff99aa;}
+}
+
 </style>
 </head>
 
@@ -134,6 +164,16 @@ video{
     <div class="envelope" id="envelope" onclick="abrirCarta()">
         Ábreme 💌
     </div>
+    <div id="instrucciones" style="
+    position:absolute;
+    top:20px;
+    text-align:center;
+    color:white;
+    font-size:18px;
+    width:100%;
+">
+     Atrapa 3 corazones para desbloquear algo especial 
+</div>
 
     <!-- CARTA -->
     <div class="card" id="card">
@@ -148,17 +188,13 @@ video{
         </p>
 
         <button onclick="revelar()">Seguir 💖</button>
-
-        <div class="video-container" id="videoBox">
+</div>
+<div class="video-container" id="videoBox">
             <p style="opacity:1;">Por nuestro gran amor mi niña</p>
             <video controls>
                 <source src="video.mp4" type="video/mp4">
             </video>
         </div>
-    </div>
-
-</div>
-
 <script>
 let corazonesAtrapados = 0;
 let paso = 0;
@@ -177,17 +213,37 @@ function crearCorazon(){
 
     heart.onclick = function(){
         corazonesAtrapados++;
-        heart.remove();
 
-        if(corazonesAtrapados >= 3){
-            document.getElementById("envelope").style.display = "flex";
+        if(corazonesAtrapados >= 5){
+            document.getElementById("instrucciones").style.display = "none";
+
+            explotar(heart);
+            setTimeout(()=>{
+                document.getElementById("envelope").style.display="flex";
+            },500);
         } else {
+            heart.remove();
             crearCorazon();
         }
     }
 
     document.body.appendChild(heart);
 }
+function explotar(heart){
+    const explosion = document.createElement("div");
+    explosion.classList.add("explosion");
+    explosion.innerHTML = "💖✨💖";
+    explosion.style.top = heart.style.top;
+    explosion.style.left = heart.style.left;
+
+    document.body.appendChild(explosion);
+    heart.remove();
+
+    setTimeout(()=>{
+        explosion.remove();
+    },800);
+}
+
 
 /* ABRIR SOBRE */
 function abrirCarta(){
@@ -214,8 +270,20 @@ function revelar(){
         document.getElementById("t2").style.opacity=1;
     }
     else if(paso===3){
-        document.getElementById("videoBox").style.display="block";
-    }
+
+    // Ocultar carta completa
+    document.getElementById("card").style.display = "none";
+
+    // Mostrar solo el video
+    const videoBox = document.getElementById("videoBox");
+    videoBox.style.display = "block";
+
+    // Reproducir automáticamente
+    const video = videoBox.querySelector("video");
+    video.muted = true;      // Necesario para autoplay en móviles
+    video.play();
+}
+
 }
 </script>
 
