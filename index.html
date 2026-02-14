@@ -176,6 +176,11 @@ video{
 #pantallaFinal button:hover{
     transform:scale(1.1);
 }
+.iconoJuego{
+    width:50px;
+    height:50px;
+    pointer-events:none;
+}
 
 
 @keyframes explode{
@@ -203,7 +208,7 @@ video{
 
     <!-- SOBRE -->
     <div class="envelope" id="envelope" onclick="abrirCarta()">
-        Ábreme 💌
+        Ábreme
     </div>
     <div id="instrucciones" style="
     position:absolute;
@@ -228,7 +233,7 @@ video{
         Mi amor, te agradezco enormemente por siempre tratar de entenderme y por siempre tratar de estar para mí, gracias por siempre decirme que me amas y por tenerme paciencia, gracias por esperarme y por no negarte a tenerme lejos, me has ayudado mucho a no sentirme tan sólo acá mi amor y siempre te lo agradeceré, pronto espero volver a estar a tu lado y abrazarte por horas y horas mi amor, tú eres el amor de mi vida mi niña. Quiero estar a tu lado cada día por el resto de mi vida y quiero arte todo porque te lo mereces mi niña, por lo feliz que me haces corazón, te amo con todo mi ser mi niña hermosa. Tú eres la niña más hermosa de todo el universo mi amor y para mí siempre lo serás mi amor.
         </p>
 
-        <button onclick="revelar()">Seguir 💖</button>
+        <button onclick="revelar()">Seguir</button>
 </div>
 <div class="video-container" id="videoBox">
             <p style="opacity:1;">Por nuestro gran amor mi niña</p>
@@ -238,9 +243,10 @@ video{
 </div>
 <div id="pantallaFinal">
     <h2>Si llegaste hasta aquí</h2>
-    <h3>Quiero que sepas que conocerte ha sido lo mejor que me ha pasado en la vida y que quiero seguir creando muchísimos recuerdo a tu lado corazón</h3>
+    <h3>Quiero que sepas que conocerte ha sido lo mejor que me ha pasado en la vida y que quiero seguir creando muchísimos recuerdos a tu lado mi niña hermosa</h3>
+    <h3>Jamás me había sentido tan feliz en mi vida, gracias mi amor</h3>
     <button onclick="irWhatsApp()">
-        Siempre mi amor
+       Te amo 
     </button>
 </div>
 
@@ -259,7 +265,7 @@ window.onload = function(){
 function crearCorazon(){
     const heart = document.createElement("div");
     heart.classList.add("heartGame");
-    heart.innerHTML = "❤️";
+    heart.innerHTML = "<img src='chiqui.png' class='iconoJuego'>";
     heart.style.top = Math.random()*80+"vh";
     heart.style.left = Math.random()*80+"vw";
 
